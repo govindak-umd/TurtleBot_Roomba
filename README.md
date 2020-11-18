@@ -1,6 +1,6 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-# ROS Publisher/Subscriber
+# Turtlebot simulation in Gazebo
 
  - Be sure to make changes to CMakeLists.txt and package.xml as needed.
 
