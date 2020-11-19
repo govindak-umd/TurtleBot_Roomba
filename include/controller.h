@@ -41,9 +41,6 @@ class Controller{
 		// Declaring the turning speed of the turtlebot
 		double turn_speed = 0.5;
 	public:
-		// Function to call the scan data 
-		// void scanCallback(const sensor_msgs::LaserScan::ConstPtr&);
-		
 		// Function to move forwards 
 		void driveForwardandStop(ros::NodeHandle, ros::Publisher , ros::Rate);
 

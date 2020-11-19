@@ -25,12 +25,13 @@
  *OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *SOFTWARE.
  */
+#include <sstream>
 #include "ros/ros.h"
 #include "geometry_msgs/Twist.h"
 #include "std_msgs/String.h"
 #include "../include/controller.h"
 #include "sensor_msgs/LaserScan.h"
-#include <sstream>
+
 
 /**
  * @brief      Main function controlling the robot
@@ -40,15 +41,15 @@
  *
  * @return     returns nothing, 0
  */
-int main(int argc, char **argv)
-{
+int main(int argc, char **argv) {
   // Initialising the node
   ros::init(argc, argv, "turtlebot_talker");
   // starting ros node handle
   ros::NodeHandle n;
   // Declaring the publisher
-  ros::Publisher chatter_pub = n.advertise<geometry_msgs::Twist>("cmd_vel", 1000); 
-  // Setting a loop rate  
+  ros::Publisher chatter_pub = n.advertise
+  <geometry_msgs::Twist>("cmd_vel", 1000);
+  // Setting a loop rate
   ros::Rate loop_rate(10);
   // Declaring a controller object
   Controller controller;
