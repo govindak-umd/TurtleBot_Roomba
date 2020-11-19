@@ -32,7 +32,6 @@
 #include "../include/controller.h"
 #include "sensor_msgs/LaserScan.h"
 
-
 /**
  * @brief      Main function controlling the robot
  *
@@ -47,8 +46,8 @@ int main(int argc, char **argv) {
   // starting ros node handle
   ros::NodeHandle n;
   // Declaring the publisher
-  ros::Publisher chatter_pub = n.advertise
-  <geometry_msgs::Twist>("cmd_vel", 1000);
+  ros::Publisher chatter_pub = n.advertise < geometry_msgs::Twist
+      > ("cmd_vel", 1000);
   // Setting a loop rate
   ros::Rate loop_rate(10);
   // Declaring a controller object

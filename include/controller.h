@@ -34,16 +34,16 @@
 /**
  * @brief      Controls the front and turning of the turtlebot
  */
-class Controller{
-	private:
-		// Declaring the front speed of the turtlebot
-		double front_speed = 0.2;
-		// Declaring the turning speed of the turtlebot
-		double turn_speed = 0.5;
-	public:
-		// Function to move forwards 
-		void driveForwardandStop(ros::NodeHandle, ros::Publisher , ros::Rate);
+class Controller {
+ private:
+  // Declaring the front speed of the turtlebot
+  double front_speed = 0.2;
+  // Declaring the turning speed of the turtlebot
+  double turn_speed = 0.5;
+ public:
+  // Function to move forwards 
+  void driveForwardandStop(ros::NodeHandle, ros::Publisher, ros::Rate);
 
-		// Function to turn backwards
-		void turnBackwards(ros::NodeHandle, ros::Publisher , ros::Rate);
+  // Function to turn backwards
+  void turnBackwards(ros::NodeHandle, ros::Publisher, ros::Rate);
 };
