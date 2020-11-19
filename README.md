@@ -58,6 +58,13 @@ This code is a demo of turtlebot in a Gazebo world environment
   <img height="500" src="images/custom_world.png">
 </p>
 
+## Turtlebot3 Installation
+
+ -  Ensure that the requirements for turtlebot3 is met. Install using the following command:
+		$ sudo apt-get install ros-melodic-turtlebot3-*
+
+ - Verify installation by launching the turtlebot in your custom world file.
+
 ## Launch file
 		
  - Add necessary lines to the launch file to spawn the custom world and a turtlebot in it
