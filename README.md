@@ -15,6 +15,8 @@ This code is a demo of turtlebot in a Gazebo world environment
 ## Assumptions
 		ROS Melodic
 		Ubuntu 18.04
+		Turtlebot3 ros package is installed (Check below for installation guidelines)
+
 ## General structure of a catkin workspace
 
 		workspace_folder/        -- WORKSPACE
