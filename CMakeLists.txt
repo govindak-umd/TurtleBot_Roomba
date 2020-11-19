@@ -121,6 +121,9 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
+add_executable(turtlebot_talker src/turtlebot_talker.cpp)
+target_link_libraries(turtlebot_talker ${catkin_LIBRARIES})
+add_dependencies(turtlebot_talker beginner_tutorials_generate_messages_cpp)
 ## Declare a C++ library
 # add_library(${PROJECT_NAME}
 #   src/${PROJECT_NAME}/turtlebot_tutorials.cpp
