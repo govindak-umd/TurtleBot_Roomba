@@ -25,23 +25,24 @@
  *OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  *SOFTWARE.
  */
+#pragma once
+#include <sstream>
 #include "ros/ros.h"
 #include "geometry_msgs/Twist.h"
 #include "std_msgs/String.h"
 #include "sensor_msgs/LaserScan.h"
-#include <sstream>
 
 /**
  * @brief      Controls the front and turning of the turtlebot
  */
-class Controller {
+class Controller{
  private:
   // Declaring the front speed of the turtlebot
   double front_speed = 0.2;
   // Declaring the turning speed of the turtlebot
   double turn_speed = 0.5;
  public:
-  // Function to move forwards 
+  // Function to move forwards
   void driveForwardandStop(ros::NodeHandle, ros::Publisher, ros::Rate);
 
   // Function to turn backwards
