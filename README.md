@@ -79,6 +79,21 @@ This code is a demo of turtlebot in a Gazebo world environment
 		
  - Add necessary lines to the launch file to spawn the custom world and a turtlebot in it
 
+ - To launch the turtlebot and run the rosbag along with it as well execute the following command
+
+		$ roslaunch turtlebot_tutorials turtlebot_tutorial.launch enable_ros_bag:=true
+
+ - To launch the turtlebot and NOT run the rosbag along with it execute the following command
+
+		$ roslaunch turtlebot_tutorials turtlebot_tutorial.launch
+
+## Visualizing the rosbag
+
+ - To visualize the rosbag at a later time, comment out the node launch from the launch file and execute the bag file
+ - The execution can be done with the following command;
+		
+		$ rosbag play turtlebot_walker.bag
+
 ## Running cpp-check
 
 		$ cppcheck --enable=all --std=c++11 -I include/ test/ src/ --suppress=missingIncludeSystem $( find . -name *.cpp | grep -vE -e "^./build/" -e "^./vendor/" -e "^./src/")
