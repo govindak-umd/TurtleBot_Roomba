@@ -22,8 +22,8 @@ void Controller::driveForwardandStop(ros::NodeHandle n, ros::Publisher chatter_p
 	int front_count = 0;
 	geometry_msgs::Twist msg;
   	// ros::Subscriber sub = n.subscribe<sensor_msgs::LaserScan>("/scan", 1000, scanCallback);
-	while (ros::ok() && front_count < 80){
-		if (front_count < 70){
+	while (ros::ok() && front_count < 150){
+		if (front_count < 140){
 		  msg.linear.x = front_speed;
 		  msg.linear.y = 0.0;
 		  msg.linear.z = 0.0;
@@ -31,7 +31,7 @@ void Controller::driveForwardandStop(ros::NodeHandle n, ros::Publisher chatter_p
 		  msg.angular.y = 0;
 		  msg.angular.z = 0;    
 		}
-		else if (front_count >= 70){
+		else if (front_count >= 140){
 		  msg.linear.x = 0.0;
 		  msg.linear.y = 0.0;
 		  msg.linear.z = 0.0;
@@ -52,13 +52,13 @@ void Controller::turnBackwards(ros::NodeHandle n, ros::Publisher chatter_pub, ro
 	int turn_count = 0;
 	geometry_msgs::Twist msg;
 	while (ros::ok() && turn_count < 75){
-		if (turn_count < 65){
+		if (turn_count < 60){
 		  msg.linear.x = 0.0;
 		  msg.linear.y = 0.0;
 		  msg.linear.z = 0.0;
 		  msg.angular.x = 0.0;
 		  msg.angular.y = 0.0;
-		  msg.angular.z = 0.5;    
+		  msg.angular.z = turn_speed;    
 		}
 		else if (turn_count >= 65){
 		  msg.linear.x = 0.0;

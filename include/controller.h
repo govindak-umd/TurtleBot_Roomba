@@ -6,7 +6,8 @@
 
 class Controller{
 	private:
-		double front_speed = 0.3;
+		double front_speed = 0.2;
+		double turn_speed = 0.5;
 	public:
 		// void scanCallback(const sensor_msgs::LaserScan::ConstPtr&);
 		void driveForwardandStop(ros::NodeHandle, ros::Publisher , ros::Rate);
