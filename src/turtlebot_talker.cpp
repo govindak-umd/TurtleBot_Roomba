@@ -14,5 +14,6 @@ int main(int argc, char **argv)
   Controller controller;
   controller.driveForwardandStop(n, chatter_pub, loop_rate);
   controller.turnBackwards(n, chatter_pub, loop_rate);
+  controller.driveForwardandStop(n, chatter_pub, loop_rate);
   return 0;
 }
