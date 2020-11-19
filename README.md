@@ -47,3 +47,18 @@ This code is a demo of turtlebot in a Gazebo world environment
 		$ catkin_make
 		$ . ~/catkin_ws/devel/setup.bash
 
+## Creating a custom world
+
+ - Use Gazebo's model editor and building editor to create a custom world file. 
+ - Store this in a .world file format.
+ - Find the world file in the worlds/ folder.
+ - A snapshot of the world file can be seen here.
+
+<p align="center">
+  <img height="500" src="images/custom_world.png">
+</p>
+
+## Launch file
+		
+ - Add necessary lines to the launch file to spawn the custom world and a turtlebot in it
+
