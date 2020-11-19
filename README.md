@@ -71,3 +71,19 @@ This code is a demo of turtlebot in a Gazebo world environment
 		
  - Add necessary lines to the launch file to spawn the custom world and a turtlebot in it
 
+## Running cpp-check
+
+		$ cppcheck --enable=all --std=c++11 -I include/ test/ src/ --suppress=missingIncludeSystem $( find . -name *.cpp | grep -vE -e "^./build/" -e "^./vendor/" -e "^./src/")
+
+## Running cpp-lint
+
+		$ cpplint $( find . -name \*.hpp -or -name \*.cpp | grep -vE -e "^./build/" -e "^./vendor/" -e "^./docs/" -e "^./results" )
+
+## Creating tags from the command line
+
+Do the following steps to create a tag for your release
+
+		$ git tag <tagname>
+		$ git git push origin --tags
+
+
