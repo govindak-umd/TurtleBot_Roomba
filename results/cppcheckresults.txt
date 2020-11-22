@@ -1,0 +1,23 @@
+Command Used:
+
+cppcheck controller.h
+
+Results:
+
+Done processing controller.h
+
+
+and
+
+Command Used:
+
+cppcheck --enable=all --std=c++11 -I include/ test/ src/ --suppress=missingIncludeSystem $( find . -name *.cpp | grep -vE -e "^./build/" -e "^./vendor/" -e "^./src/")
+
+
+Results:
+
+Checking src/controller.cpp ...
+1/2 files checked 50% done
+Checking src/turtlebot_talker.cpp ...
+2/2 files checked 100% done
+
