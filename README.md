@@ -82,11 +82,13 @@ This code is a demo of turtlebot in a Gazebo world environment
  - To launch the turtlebot and run the rosbag along with it as well execute the following command
 
 		$ roslaunch turtlebot_tutorials turtlebot_tutorial.launch enable_ros_bag:=true
+ - NOTE : When this is run, the programme will shut down after 40 seconds, that is after the rosbag is  recorded
 
  - To launch the turtlebot and NOT run the rosbag along with it execute the following command
 
 		$ roslaunch turtlebot_tutorials turtlebot_tutorial.launch
 
+ - NOTE: When this is run, the robot will keep bouncing around within the environment forever.
 ## Visualizing the rosbag
 
  - Without having Gazebo launched, start ros by typing the following in a terminal.
