@@ -62,7 +62,7 @@ void Controller::driveForwardandStop(ros::NodeHandle n,
   ROS_INFO_STREAM("Front motion Stopped");
 }
 
-void Controller::keepTurning(ros::NodeHandle n, ros::Publisher chatter_pub,
+void Controller::turnBackwards(ros::NodeHandle n, ros::Publisher chatter_pub,
                                ros::Rate loop_rate) {
   int turn_count = 0;
   geometry_msgs::Twist msg;

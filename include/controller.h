@@ -46,7 +46,7 @@ class Controller{
   void driveForwardandStop(ros::NodeHandle, ros::Publisher, ros::Rate);
 
   // Function to turn backwards
-  void keepTurning(ros::NodeHandle, ros::Publisher, ros::Rate);
+  void turnBackwards(ros::NodeHandle, ros::Publisher, ros::Rate);
 
   // Function to stop the robot
   void stopRobot(ros::Publisher, ros::Rate);
