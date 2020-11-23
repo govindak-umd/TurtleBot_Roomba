@@ -35,7 +35,7 @@
 /**
  * @brief      Controls the front and turning of the turtlebot
  */
-class Controller{
+class Controller {
  private:
   // Declaring the front speed of the turtlebot
   double front_speed = 0.2;
@@ -44,7 +44,7 @@ class Controller{
   // Subscriber for the LIDAR Data
   ros::Subscriber lidar_data;
   //boolean for obstacle detection
-  bool obstacle_detected =  false;
+  bool obstacle_detected = false;
   //boolean for making sure the robot can move ahead
   bool path_clear = true;
   // declaring a minimum distance the robot can stay away from the obstacle
@@ -53,7 +53,7 @@ class Controller{
   double sleep_duration = 0.4;
  public:
   // Declaring the new constructor
-  Controller(ros::NodeHandle);
+  explicit Controller (ros::NodeHandle);
   // Function to start the turtlebot motion in the environment
   void turtlebotInitiate(ros::NodeHandle, ros::Publisher, ros::Rate);
   // Function to keep turning while the robot is clear of any obstacles

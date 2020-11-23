@@ -47,7 +47,7 @@ int main(int argc, char **argv) {
   ros::NodeHandle n;
   // Declaring the Twist publisher
   ros::Publisher chatter_pub = n.advertise < geometry_msgs::Twist
-        > ("cmd_vel", 1000);
+      > ("cmd_vel", 1000);
   // Setting a loop rate
   ros::Rate loop_rate(10);
   // Declaring a controller object

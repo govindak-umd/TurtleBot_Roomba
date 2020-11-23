@@ -32,28 +32,28 @@
 #include "../include/controller.h"
 #include "sensor_msgs/LaserScan.h"
 
-Controller::Controller(ros::NodeHandle n){
-  lidar_data = n.subscribe<sensor_msgs::LaserScan>("/scan", 10,&Controller::readLidar, this);
+Controller::Controller(ros::NodeHandle n) {
+  lidar_data = n.subscribe < sensor_msgs::LaserScan
+      > ("/scan", 10, &Controller::readLidar, this);
 }
 
 void Controller::turtlebotInitiate(ros::NodeHandle n,
-                                     ros::Publisher chatter_pub,
-                                     ros::Rate loop_rate) {
+                                   ros::Publisher chatter_pub,
+                                   ros::Rate loop_rate) {
   geometry_msgs::Twist msg;
   while (ros::ok()) {
     if (obstacle_detected) {
-        stopRobot(chatter_pub, loop_rate);
-        ROS_WARN_STREAM("OBSTACLE DETECTED! Computing alternate path...");
-        keepTurning(n, chatter_pub, loop_rate);
-    }
-    else {
-        ROS_INFO_STREAM("MOVING FORWARDS!");
-        msg.linear.x = front_speed;
-        msg.linear.y = 0.0;
-        msg.linear.z = 0.0;
-        msg.angular.x = 0.0;
-        msg.angular.y = 0.0;
-        msg.angular.z = 0.0;
+      stopRobot(chatter_pub, loop_rate);
+      ROS_WARN_STREAM("OBSTACLE DETECTED! Computing alternate path...");
+      keepTurning(n, chatter_pub, loop_rate);
+    } else {
+      ROS_INFO_STREAM("MOVING FORWARDS!");
+      msg.linear.x = front_speed;
+      msg.linear.y = 0.0;
+      msg.linear.z = 0.0;
+      msg.angular.x = 0.0;
+      msg.angular.y = 0.0;
+      msg.angular.z = 0.0;
     }
     chatter_pub.publish(msg);
     ros::spinOnce();
@@ -62,25 +62,24 @@ void Controller::turtlebotInitiate(ros::NodeHandle n,
 }
 
 void Controller::keepTurning(ros::NodeHandle n, ros::Publisher chatter_pub,
-                               ros::Rate loop_rate) {
-    geometry_msgs::Twist msg;
-    msg.linear.x = 0.0;
-    msg.linear.y = 0.0;
-    msg.linear.z = 0.0;
-    msg.angular.x = 0.0;
-    msg.angular.y = 0.0;
-    msg.angular.z = turn_speed;
-    chatter_pub.publish(msg);
-    while (!path_clear) {
-        loop_rate.sleep();
-        ros::spinOnce();
-    }
-    stopRobot(chatter_pub, loop_rate);
-    obstacle_detected = false;
+                             ros::Rate loop_rate) {
+  geometry_msgs::Twist msg;
+  msg.linear.x = 0.0;
+  msg.linear.y = 0.0;
+  msg.linear.z = 0.0;
+  msg.angular.x = 0.0;
+  msg.angular.y = 0.0;
+  msg.angular.z = turn_speed;
+  chatter_pub.publish(msg);
+  while (!path_clear) {
+    loop_rate.sleep();
+    ros::spinOnce();
+  }
+  stopRobot(chatter_pub, loop_rate);
+  obstacle_detected = false;
 }
 
-
-void Controller::stopRobot(ros::Publisher chatter_pub, ros::Rate loop_rate){
+void Controller::stopRobot(ros::Publisher chatter_pub, ros::Rate loop_rate) {
   geometry_msgs::Twist msg;
   msg.linear.x = 0.0;
   msg.linear.y = 0.0;
@@ -92,25 +91,26 @@ void Controller::stopRobot(ros::Publisher chatter_pub, ros::Rate loop_rate){
   ros::Duration(sleep_duration).sleep();
 }
 
-void Controller::readLidar(const sensor_msgs::LaserScan::ConstPtr& msg){
+void Controller::readLidar(const sensor_msgs::LaserScan::ConstPtr &msg) {
   int lidar_range = 30;
 
   std::vector<double> obstacles_detected;
   std::vector<double> lidar_range_vect;
 
   lidar_range_vect = std::vector<double>(msg->ranges.begin(),
-      msg->ranges.begin()+lidar_range);
-  obstacles_detected = std::vector<double>(msg->ranges.end()-lidar_range,
-      msg->ranges.end());
+                                         msg->ranges.begin() + lidar_range);
+  obstacles_detected = std::vector<double>(msg->ranges.end() - lidar_range,
+                                           msg->ranges.end());
 
-  obstacles_detected.insert(obstacles_detected.end(), lidar_range_vect.begin(), lidar_range_vect.end());
+  obstacles_detected.insert(obstacles_detected.end(), lidar_range_vect.begin(),
+                            lidar_range_vect.end());
 
   path_clear = true;
 
-  for (auto& range : obstacles_detected) {
-      if (range < collision_threshold) {
-          obstacle_detected = true;
-          path_clear = false;
-      }
+  for (auto &range : obstacles_detected) {
+    if (range < collision_threshold) {
+      obstacle_detected = true;
+      path_clear = false;
+    }
   }
 }
