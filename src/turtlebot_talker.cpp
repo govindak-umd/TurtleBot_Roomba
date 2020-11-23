@@ -53,6 +53,6 @@ int main(int argc, char **argv) {
   // Declaring a controller object
   Controller controller(n);
   // Moving forwards
-  controller.driveForwardandStop(n, chatter_pub, loop_rate);
+  controller.turtlebotInitiate(n, chatter_pub, loop_rate);
   return 0;
 }

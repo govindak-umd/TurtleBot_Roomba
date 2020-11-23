@@ -52,12 +52,10 @@ class Controller{
  public:
   // Declaring the new constructor
   Controller(ros::NodeHandle);
-  // Function to move forwards
-  void driveForwardandStop(ros::NodeHandle, ros::Publisher, ros::Rate);
-
-  // Function to turn backwards
-  // void turnBackwards(ros::NodeHandle, ros::Publisher, ros::Rate);
-
+  // Function to start the turtlebot motion in the environment
+  void turtlebotInitiate(ros::NodeHandle, ros::Publisher, ros::Rate);
+  // Function to keep turning while the robot is clear of any obstacles
+  void keepTurning(ros::NodeHandle, ros::Publisher, ros::Rate);
   // Function to stop the robot
   void stopRobot(ros::Publisher, ros::Rate);
   // get LIDAR Data
