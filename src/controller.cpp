@@ -62,7 +62,7 @@ void Controller::driveForwardandStop(ros::NodeHandle n,
   ROS_INFO_STREAM("Front motion Stopped");
 }
 
-void Controller::turnBackwards(ros::NodeHandle n, ros::Publisher chatter_pub,
+void Controller::keepTurning(ros::NodeHandle n, ros::Publisher chatter_pub,
                                ros::Rate loop_rate) {
   int turn_count = 0;
   geometry_msgs::Twist msg;
@@ -90,3 +90,15 @@ void Controller::turnBackwards(ros::NodeHandle n, ros::Publisher chatter_pub,
   }
   ROS_INFO_STREAM("Turn motion Stopped");
 }
+
+void Controller::stopRobot(ros::Publisher chatter_pub, ros::Rate loop_rate){
+  geometry_msgs::Twist msg;
+  msg.linear.x = 0.0;
+  msg.linear.y = 0.0;
+  msg.linear.z = 0.0;
+  msg.angular.x = 0.0;
+  msg.angular.y = 0.0;
+  chatter_pub.publish(msg);
+  loop_rate.sleep();
+}
+
