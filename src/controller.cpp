@@ -41,20 +41,19 @@ void Controller::turtlebotInitiate(ros::NodeHandle n,
                                      ros::Rate loop_rate) {
   geometry_msgs::Twist msg;
   while (ros::ok()) {
-    msg.linear.x = front_speed;
-    msg.linear.y = 0.0;
-    msg.linear.z = 0.0;
-    msg.angular.x = 0;
-    msg.angular.y = 0;
-    msg.angular.z = 0;
     if (obstacle_detected) {
-        ROS_INFO_STREAM("Front motion is done");
+        stopRobot(chatter_pub, loop_rate);
         ROS_INFO_STREAM("OBSTACLE DETECTED!");
-        stopRobot(chatter_pub,loop_rate);
-        while(obstacle_detected!=false){
-          ROS_INFO_STREAM("Turning the bot...");
-          // keepTurning(n,chatter_pub,loop_rate);
-        }
+        keepTurning(n, chatter_pub, loop_rate);
+    }
+    else {
+        ROS_INFO_STREAM("MOVING FORWARDS!");
+        msg.linear.x = front_speed;
+        msg.linear.y = 0.0;
+        msg.linear.z = 0.0;
+        msg.angular.x = 0.0;
+        msg.angular.y = 0.0;
+        msg.angular.z = 0.0;
     }
     chatter_pub.publish(msg);
     ros::spinOnce();
@@ -64,23 +63,22 @@ void Controller::turtlebotInitiate(ros::NodeHandle n,
 
 void Controller::keepTurning(ros::NodeHandle n, ros::Publisher chatter_pub,
                                ros::Rate loop_rate) {
-  geometry_msgs::Twist msg;
-  while (ros::ok()) {
-  msg.linear.x = 0.0;
-  msg.linear.y = 0.0;
-  msg.linear.z = turn_speed;
-  msg.angular.x = 0.0;
-  msg.angular.y = 0.0;
-  if (obstacle_detected == false){
-    ROS_INFO_STREAM("Turn motion Stopped");
-    stopRobot(chatter_pub,loop_rate);
-    ROS_INFO_STREAM("Path is clear now!");
+    geometry_msgs::Twist msg;
+    msg.linear.x = 0.0;
+    msg.linear.y = 0.0;
+    msg.linear.z = 0.0;
+    msg.angular.x = 0.0;
+    msg.angular.y = 0.0;
+    msg.angular.z = turn_speed;
+    chatter_pub.publish(msg);
+    while (!path_clear) {
+        loop_rate.sleep();
+        ros::spinOnce();
     }
-  }
-  chatter_pub.publish(msg);
-  ros::spinOnce();
-  loop_rate.sleep();
+    stopRobot(chatter_pub, loop_rate);
+    obstacle_detected = false;
 }
+
 
 void Controller::stopRobot(ros::Publisher chatter_pub, ros::Rate loop_rate){
   geometry_msgs::Twist msg;
@@ -89,8 +87,9 @@ void Controller::stopRobot(ros::Publisher chatter_pub, ros::Rate loop_rate){
   msg.linear.z = 0.0;
   msg.angular.x = 0.0;
   msg.angular.y = 0.0;
+  msg.angular.z = 0.0;
   chatter_pub.publish(msg);
-  loop_rate.sleep();
+  ros::Duration(sleep_duration).sleep();
 }
 
 void Controller::readLidar(const sensor_msgs::LaserScan::ConstPtr& msg){

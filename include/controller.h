@@ -46,9 +46,11 @@ class Controller{
   //boolean for obstacle detection
   bool obstacle_detected =  false;
   //boolean for making sure the robot can move ahead
-  bool path_clear = false;
+  bool path_clear = true;
   // declaring a minimum distance the robot can stay away from the obstacle
   double collision_threshold = 0.35;
+  // sleep duration so that stop doesn't keep getting called
+  double sleep_duration = 0.4;
  public:
   // Declaring the new constructor
   Controller(ros::NodeHandle);
