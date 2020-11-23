@@ -96,7 +96,7 @@ This code is a demo of turtlebot in a Gazebo world environment
 
  		$ rosbag play turtlebot_walker.bag
 
- - To visualize the rosbag at a later time in Gazebo, comment out the node launch from the launch file and execute the bag file
+ - To visualize the rosbag at a later time in Gazebo, comment out the node launch from the launch file and execute the bag file (line number 30)
  - Now you have the Gazebo environment with the turtlebot open
  - The execution can be done with the following command;
 		
