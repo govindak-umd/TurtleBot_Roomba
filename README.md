@@ -82,11 +82,13 @@ This code is a demo of turtlebot in a Gazebo world environment
  - To launch the turtlebot and run the rosbag along with it as well execute the following command
 
 		$ roslaunch turtlebot_tutorials turtlebot_tutorial.launch enable_ros_bag:=true
+ - NOTE : When this is run, the programme will shut down after 40 seconds, that is after the rosbag is  recorded
 
  - To launch the turtlebot and NOT run the rosbag along with it execute the following command
 
 		$ roslaunch turtlebot_tutorials turtlebot_tutorial.launch
 
+ - NOTE: When this is run, the robot will keep bouncing around within the environment forever.
 ## Visualizing the rosbag
 
  - Without having Gazebo launched, start ros by typing the following in a terminal.
@@ -96,7 +98,7 @@ This code is a demo of turtlebot in a Gazebo world environment
 
  		$ rosbag play turtlebot_walker.bag
 
- - To visualize the rosbag at a later time in Gazebo, comment out the node launch from the launch file and execute the bag file
+ - To visualize the rosbag at a later time in Gazebo, comment out the node launch from the launch file and execute the bag file (line number 30)
  - Now you have the Gazebo environment with the turtlebot open
  - The execution can be done with the following command;
 		
@@ -115,6 +117,6 @@ This code is a demo of turtlebot in a Gazebo world environment
 Do the following steps to create a tag for your release
 
 		$ git tag <tagname>
-		$ git git push origin --tags
+		$ git push origin --tags
 
 

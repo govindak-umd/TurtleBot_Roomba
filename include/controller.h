@@ -35,16 +35,31 @@
 /**
  * @brief      Controls the front and turning of the turtlebot
  */
-class Controller{
+class Controller {
  private:
   // Declaring the front speed of the turtlebot
   double front_speed = 0.2;
   // Declaring the turning speed of the turtlebot
   double turn_speed = 0.5;
+  // Subscriber for the LIDAR Data
+  ros::Subscriber lidar_data;
+  //boolean for obstacle detection
+  bool obstacle_detected = false;
+  //boolean for making sure the robot can move ahead
+  bool path_clear = true;
+  // declaring a minimum distance the robot can stay away from the obstacle
+  double collision_threshold = 0.35;
+  // sleep duration so that stop doesn't keep getting called
+  double sleep_duration = 0.4;
  public:
-  // Function to move forwards
-  void driveForwardandStop(ros::NodeHandle, ros::Publisher, ros::Rate);
-
-  // Function to turn backwards
-  void turnBackwards(ros::NodeHandle, ros::Publisher, ros::Rate);
+  // Declaring the new constructor
+  explicit Controller (ros::NodeHandle);
+  // Function to start the turtlebot motion in the environment
+  void turtlebotInitiate(ros::NodeHandle, ros::Publisher, ros::Rate);
+  // Function to keep turning while the robot is clear of any obstacles
+  void keepTurning(ros::NodeHandle, ros::Publisher, ros::Rate);
+  // Function to stop the robot
+  void stopRobot(ros::Publisher, ros::Rate);
+  // get LIDAR Data
+  void readLidar(const sensor_msgs::LaserScan::ConstPtr&);
 };
