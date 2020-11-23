@@ -115,6 +115,6 @@ This code is a demo of turtlebot in a Gazebo world environment
 Do the following steps to create a tag for your release
 
 		$ git tag <tagname>
-		$ git git push origin --tags
+		$ git push origin --tags
 
 

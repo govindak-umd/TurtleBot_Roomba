@@ -43,7 +43,7 @@ void Controller::turtlebotInitiate(ros::NodeHandle n,
   while (ros::ok()) {
     if (obstacle_detected) {
         stopRobot(chatter_pub, loop_rate);
-        ROS_INFO_STREAM("OBSTACLE DETECTED!");
+        ROS_WARN_STREAM("OBSTACLE DETECTED! Computing alternate path...");
         keepTurning(n, chatter_pub, loop_rate);
     }
     else {

@@ -52,7 +52,7 @@ int main(int argc, char **argv) {
   ros::Rate loop_rate(10);
   // Declaring a controller object
   Controller controller(n);
-  // Moving forwards
+  // start the roomba like turtlebot
   controller.turtlebotInitiate(n, chatter_pub, loop_rate);
   return 0;
 }
