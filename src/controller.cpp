@@ -32,6 +32,9 @@
 #include "../include/controller.h"
 #include "sensor_msgs/LaserScan.h"
 
+Controller::Controller(ros::NodeHandle n){
+  lidar_data = n.subscribe<sensor_msgs::LaserScan>("/scan", 10,&Controller::readLidar, this);
+}
 void Controller::driveForwardandStop(ros::NodeHandle n,
                                      ros::Publisher chatter_pub,
                                      ros::Rate loop_rate) {
@@ -102,3 +105,6 @@ void Controller::stopRobot(ros::Publisher chatter_pub, ros::Rate loop_rate){
   loop_rate.sleep();
 }
 
+void Controller::readLidar(const sensor_msgs::LaserScan::ConstPtr& msg){
+  int lidar_range = 30;
+}

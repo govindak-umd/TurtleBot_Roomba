@@ -41,7 +41,11 @@ class Controller{
   double front_speed = 0.2;
   // Declaring the turning speed of the turtlebot
   double turn_speed = 0.5;
+  // Subscriber for the LIDAR Data
+  ros::Subscriber lidar_data;
  public:
+  // Declaring the new constructor
+  Controller(ros::NodeHandle);
   // Function to move forwards
   void driveForwardandStop(ros::NodeHandle, ros::Publisher, ros::Rate);
 
@@ -50,4 +54,6 @@ class Controller{
 
   // Function to stop the robot
   void stopRobot(ros::Publisher, ros::Rate);
+  // get LIDAR Data
+  void readLidar(const sensor_msgs::LaserScan::ConstPtr&);
 };

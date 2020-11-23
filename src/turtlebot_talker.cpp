@@ -45,13 +45,13 @@ int main(int argc, char **argv) {
   ros::init(argc, argv, "turtlebot_talker");
   // starting ros node handle
   ros::NodeHandle n;
-  // Declaring the publisher
+  // Declaring the Twist publisher
   ros::Publisher chatter_pub = n.advertise < geometry_msgs::Twist
       > ("cmd_vel", 1000);
   // Setting a loop rate
   ros::Rate loop_rate(10);
   // Declaring a controller object
-  Controller controller;
+  Controller controller(n);
   // Moving forwards
   controller.driveForwardandStop(n, chatter_pub, loop_rate);
   // Turning backwards
