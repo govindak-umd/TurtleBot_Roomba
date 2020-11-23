@@ -35,64 +35,57 @@
 Controller::Controller(ros::NodeHandle n){
   lidar_data = n.subscribe<sensor_msgs::LaserScan>("/scan", 10,&Controller::readLidar, this);
 }
+
 void Controller::driveForwardandStop(ros::NodeHandle n,
                                      ros::Publisher chatter_pub,
                                      ros::Rate loop_rate) {
-  int front_count = 0;
   geometry_msgs::Twist msg;
-  while (ros::ok() && front_count < 150) {
-    if (front_count < 140) {
-      msg.linear.x = front_speed;
-      msg.linear.y = 0.0;
-      msg.linear.z = 0.0;
-      msg.angular.x = 0;
-      msg.angular.y = 0;
-      msg.angular.z = 0;
-    } else {
-      msg.linear.x = 0.0;
-      msg.linear.y = 0.0;
-      msg.linear.z = 0.0;
-      msg.angular.x = 0;
-      msg.angular.y = 0;
-      msg.angular.z = 0;
+  while (ros::ok()) {
+    msg.linear.x = front_speed;
+    msg.linear.y = 0.0;
+    msg.linear.z = 0.0;
+    msg.angular.x = 0;
+    msg.angular.y = 0;
+    msg.angular.z = 0;
+    if (obstacle_detected) {
+        ROS_INFO_STREAM("OBSTACLE DETECTED!");
+        stopRobot(chatter_pub,loop_rate);
     }
     chatter_pub.publish(msg);
     ros::spinOnce();
     loop_rate.sleep();
-    ROS_INFO_STREAM(front_count);
-    ++front_count;
   }
-  ROS_INFO_STREAM("Front motion Stopped");
+  ROS_INFO_STREAM("Front motion is done");
 }
 
-void Controller::turnBackwards(ros::NodeHandle n, ros::Publisher chatter_pub,
-                               ros::Rate loop_rate) {
-  int turn_count = 0;
-  geometry_msgs::Twist msg;
-  while (ros::ok() && turn_count < 75) {
-    if (turn_count < 60) {
-      msg.linear.x = 0.0;
-      msg.linear.y = 0.0;
-      msg.linear.z = 0.0;
-      msg.angular.x = 0.0;
-      msg.angular.y = 0.0;
-      msg.angular.z = turn_speed;
-    } else {
-      msg.linear.x = 0.0;
-      msg.linear.y = 0.0;
-      msg.linear.z = 0.0;
-      msg.angular.x = 0.0;
-      msg.angular.y = 0.0;
-      msg.angular.z = 0.0;
-    }
-    chatter_pub.publish(msg);
-    ros::spinOnce();
-    loop_rate.sleep();
-    ROS_INFO_STREAM(turn_count);
-    ++turn_count;
-  }
-  ROS_INFO_STREAM("Turn motion Stopped");
-}
+// void Controller::turnBackwards(ros::NodeHandle n, ros::Publisher chatter_pub,
+//                                ros::Rate loop_rate) {
+//   int turn_count = 0;
+//   geometry_msgs::Twist msg;
+//   while (ros::ok() && turn_count < 75) {
+//     if (turn_count < 60) {
+//       msg.linear.x = 0.0;
+//       msg.linear.y = 0.0;
+//       msg.linear.z = 0.0;
+//       msg.angular.x = 0.0;
+//       msg.angular.y = 0.0;
+//       msg.angular.z = turn_speed;
+//     } else {
+//       msg.linear.x = 0.0;
+//       msg.linear.y = 0.0;
+//       msg.linear.z = 0.0;
+//       msg.angular.x = 0.0;
+//       msg.angular.y = 0.0;
+//       msg.angular.z = 0.0;
+//     }
+//     chatter_pub.publish(msg);
+//     ros::spinOnce();
+//     loop_rate.sleep();
+//     ROS_INFO_STREAM(turn_count);
+//     ++turn_count;
+//   }
+//   ROS_INFO_STREAM("Turn motion Stopped");
+// }
 
 void Controller::stopRobot(ros::Publisher chatter_pub, ros::Rate loop_rate){
   geometry_msgs::Twist msg;
@@ -107,4 +100,23 @@ void Controller::stopRobot(ros::Publisher chatter_pub, ros::Rate loop_rate){
 
 void Controller::readLidar(const sensor_msgs::LaserScan::ConstPtr& msg){
   int lidar_range = 30;
+
+  std::vector<double> obstacles_detected;
+  std::vector<double> lidar_range_vect;
+
+  lidar_range_vect = std::vector<double>(msg->ranges.begin(),
+      msg->ranges.begin()+lidar_range);
+  obstacles_detected = std::vector<double>(msg->ranges.end()-lidar_range,
+      msg->ranges.end());
+
+  obstacles_detected.insert(obstacles_detected.end(), lidar_range_vect.begin(), lidar_range_vect.end());
+
+  path_clear = true;
+
+  for (auto& range : obstacles_detected) {
+      if (range < collision_threshold) {
+          obstacle_detected = true;
+          path_clear = false;
+      }
+  }
 }

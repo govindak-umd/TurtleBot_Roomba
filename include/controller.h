@@ -43,6 +43,12 @@ class Controller{
   double turn_speed = 0.5;
   // Subscriber for the LIDAR Data
   ros::Subscriber lidar_data;
+  //boolean for obstacle detection
+  bool obstacle_detected =  false;
+  //boolean for making sure the robot can move ahead
+  bool path_clear = false;
+  // declaring a minimum distance the robot can stay away from the obstacle
+  double collision_threshold = 0.35;
  public:
   // Declaring the new constructor
   Controller(ros::NodeHandle);
@@ -50,7 +56,7 @@ class Controller{
   void driveForwardandStop(ros::NodeHandle, ros::Publisher, ros::Rate);
 
   // Function to turn backwards
-  void turnBackwards(ros::NodeHandle, ros::Publisher, ros::Rate);
+  // void turnBackwards(ros::NodeHandle, ros::Publisher, ros::Rate);
 
   // Function to stop the robot
   void stopRobot(ros::Publisher, ros::Rate);
