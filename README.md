@@ -10,7 +10,11 @@ Govind Ajith Kumar
 
 ## Overview
 
-This code is a demo of turtlebot in a Gazebo world environment
+This code is a demo of turtlebot in a Gazebo world environment.
+
+## Video
+
+Please view the turtlebot navigating a space [on Youtube](https://www.youtube.com/watch?v=vQM4wIxu9l4).
  
 ## Assumptions
 		ROS Melodic
