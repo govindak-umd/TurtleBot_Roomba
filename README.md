@@ -10,7 +10,7 @@ Govind Ajith Kumar
 
 ## Overview
 
-This code is a demo of turtlebot in a Gazebo world environment.
+This code is a demo of iRoomba-like turtlebot in a Gazebo world environment. The code is a depiction of how the robot might reach when it comes across obstacles. 
 
 ## Video
 
